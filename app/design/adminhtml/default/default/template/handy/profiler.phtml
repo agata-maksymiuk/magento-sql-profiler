@@ -1,0 +1,107 @@
+<?php ?>
+<style type="text/css">
+#profiler-section {
+  padding: 30px 100px;
+  background: #FFFFFF;
+  border-top: 1px dashed #DEDEDE;
+  font-size: 12px;
+  font-family: monospace;
+  color: #808080;
+}
+#profiler-section strong {
+  color: #404040;
+}
+#profiler-section section {
+  padding-bottom: 30px;
+}
+#profiler-section section table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #EEEEEE;
+}
+#profiler-section section table th,
+#profiler-section section table td {
+  font-family: monospace;
+  font-size: 12px;
+  padding: 2px 4px;
+  border: 1px solid #EEEEEE;
+  text-align: left;
+  vertical-align: top;
+}
+#profiler-section section table .profiler-right {
+  text-align: right;
+}
+#profiler-section section .sql-profiler-resume {
+  padding-bottom: 15px;
+}
+</style>
+
+<div id="profiler-section">
+    <section>
+        <table>
+            <tr>
+                <th>Code Profiler</th>
+                <th class="profiler-right">Time</th>
+                <th class="profiler-right">Cnt</th>
+                <th class="profiler-right">Emalloc</th>
+                <th class="profiler-right">RealMem</th>
+            </tr>
+            <?php foreach ( Varien_Profiler::getTimers() as $name => $timer ) { ?>
+            <tr>
+                <td>
+                    <?php echo $this->colorize($name) ?>
+                </td>
+                <td class="profiler-right">
+                    <?php echo number_format(Varien_Profiler::fetch($name,'sum'),4) ?>
+                </td>
+                <td class="profiler-right">
+                    <?php echo Varien_Profiler::fetch($name,'count') ?>
+                </td>
+                <td class="profiler-right">
+                    <?php echo number_format(Varien_Profiler::fetch($name,'emalloc'),0,"."," ") ?>
+                </td>
+                <td class="profiler-right">
+                    <?php echo number_format(Varien_Profiler::fetch($name,'realmem'),0,"."," ") ?>
+                </td>
+            </tr>
+            <?php } ?>
+        </table>
+    </section>
+
+    <?php foreach ( $this->getSqlProfilers() as $instance => $sqlProfiler ) { ?>
+    <section>
+        <div>Object #<?php echo $instance ?></div>
+
+        <?php if ( $sqlProfiler->getQueries() ) { ?>
+
+        <div class="sql-profiler-resume">
+            <div>
+                Executed <strong><?php echo $sqlProfiler->getQueryCount() ?> queries</strong>
+                in <strong><?php echo number_format($sqlProfiler->getTotalTime(),6,".","") ?> seconds</strong>
+            </div>
+            <div>
+                Longest query length: <strong><?php echo number_format($sqlProfiler->getLongestQuery()->getElapsedSecs(),6,".","") ?> seconds</strong>
+            </div>
+            <div>
+                Longest query: <?php echo $sqlProfiler->getLongestQuery()->getQuery() ?>
+            </div>
+        </div>
+
+        <table>
+        <?php foreach ( $sqlProfiler->getQueries() as $query ) { ?>
+            <tr>
+                <td>[<?php echo number_format($query->getElapsedSecs(),6,".","") ?>]</td>
+                <td><?php echo $this->colorizeQuery($query->getQuery()) ?></td>
+            </tr>
+        <?php } ?>
+        </table>
+
+        <?php } else { ?>
+            <strong>SQL Profiler is disabled for this connection.</strong>
+            <br />Enable it by adding &lt;profiler&gt;true&lt;/profiler&gt; in local.xml
+        <?php } ?>
+
+    </section>
+    <?php } ?>
+
+</div>

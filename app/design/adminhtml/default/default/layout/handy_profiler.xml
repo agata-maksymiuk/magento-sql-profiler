@@ -1,0 +1,7 @@
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="handy_profiler/profiler" name="handy.profiler" template="handy/profiler.phtml" />
+        </reference>
+    </default>
+</layout>
