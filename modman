@@ -1,0 +1,6 @@
+app/etc/modules/Handy_Profiler.xml                              app/etc/modules/Handy_Profiler.xml
+app/code/community/Handy/Profiler                               app/code/community/Handy/Profiler
+app/design/adminhtml/default/default/layout/handy_profiler.xml  app/design/adminhtml/default/default/layout/handy_profiler.xml
+app/design/adminhtml/default/default/template/handy             app/design/adminhtml/default/default/template/handy
+app/design/frontend/base/default/layout/handy_profiler.xml      app/design/frontend/base/default/layout/handy_profiler.xml
+app/design/frontend/base/default/template/handy                 app/design/frontend/base/default/template/handy
