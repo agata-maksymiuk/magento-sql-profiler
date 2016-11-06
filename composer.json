@@ -1,0 +1,20 @@
+{
+    "name": "handy/profiler",
+    "type": "magento-module",
+    "description": "Extended Magento 1.x Profiler with SQL queries list",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Agata Maksymiuk"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ]
+}
