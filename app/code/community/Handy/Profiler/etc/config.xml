@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Handy_Profiler>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </Handy_Profiler>
     </modules>
     <global>
@@ -26,6 +26,21 @@
                 </rewrite>
             </core>
         </models>
+        <helpers>
+            <handy_profiler>
+                <class>Handy_Profiler_Helper</class>
+            </handy_profiler>
+        </helpers>
+        <events>
+            <core_block_abstract_to_html_before>
+                <observers>
+                    <handy_profiler_mark_cached_blocks>
+                        <class>handy_profiler/block_observer</class>
+                        <method>markCachedBlocks</method>
+                    </handy_profiler_mark_cached_blocks>
+                </observers>
+            </core_block_abstract_to_html_before>
+        </events>
     </global>
     <adminhtml>
         <layout>
