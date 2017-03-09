@@ -9,16 +9,10 @@ class Handy_Profiler_Block_Profiler
 
     protected function _toHtml()
     {
-        if ( !$this->_isEnabled() ) {
+        if ( !Mage::helper('handy_profiler')->isEnabled() ) {
             return '';
         }
         return parent::_toHtml();
-    }
-
-
-    protected function _isEnabled()
-    {
-        return Mage::getStoreConfig('dev/debug/profiler') && Mage::helper('core')->isDevAllowed();
     }
 
 
